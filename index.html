@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Placar Farmácia - Alcance de Metas</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Cabeçalho -->
+      <header class="header">
+        <h1>MCI SUFARC</h1>
+        <div class="meta-info">
+          <span class="titulo-meta">Aumentar o nível de maturidade digital da Farmácia Clínica de 0% para 98% até 31/12/2025</span>
+        </div>
+      </header>
+
+      <!-- Dashboard Principal -->
+      <div class="dashboard">
+        <!-- Seção dos Medicamentos (Amarelo) -->
+        <section class="medicamentos-section">
+          <h2>Medicamentos</h2>
+          <div class="medicamentos-container">
+            <div class="medicamento-box" data-nome="DesvenlafaxAnderson">
+              <div class="medicamento-header">
+                <h3>DesvenlafaxAnderson</h3>
+                <span class="porcentagem">0</span>
+              </div>
+              <div class="medicamento-info">75mg</div>
+              <div class="barra-progresso">
+                <div class="barra-preenchimento"></div>
+              </div>
+              <div class="laboratorio">SUFARC Pharma</div>
+            </div>
+
+            <div class="medicamento-box" data-nome="Renatril">
+              <div class="medicamento-header">
+                <h3>Renatril</h3>
+                <span class="porcentagem">0</span>
+              </div>
+              <div class="medicamento-info">250mg</div>
+              <div class="barra-progresso">
+                <div class="barra-preenchimento"></div>
+              </div>
+              <div class="laboratorio">SUFARC Pharma</div>
+            </div>
+
+            <div class="medicamento-box" data-nome="Karicicilina">
+              <div class="medicamento-header">
+                <h3>Karicicilina</h3>
+                <span class="porcentagem">0</span>
+              </div>
+              <div class="medicamento-info">1000mg</div>
+              <div class="barra-progresso">
+                <div class="barra-preenchimento"></div>
+              </div>
+              <div class="laboratorio">SUFARC Pharma</div>
+            </div>
+
+            <div class="medicamento-box" data-nome="Jardenal">
+              <div class="medicamento-header">
+                <h3>Jardenal</h3>
+                <span class="porcentagem">0</span>
+              </div>
+              <div class="medicamento-info">100mg</div>
+              <div class="barra-progresso">
+                <div class="barra-preenchimento"></div>
+              </div>
+              <div class="laboratorio">SUFARC Pharma</div>
+            </div>
+
+            <div class="medicamento-box" data-nome="DipiRonne">
+              <div class="medicamento-header">
+                <h3>DipiRonne</h3>
+                <span class="porcentagem">0</span>
+              </div>
+              <div class="medicamento-info">500mg</div>
+              <div class="barra-progresso">
+                <div class="barra-preenchimento"></div>
+              </div>
+              <div class="laboratorio">SUFARC Pharma</div>
+            </div>
+
+            <div class="medicamento-box" data-nome="Elietazepam">
+              <div class="medicamento-header">
+                <h3>Elietazepam</h3>
+                <span class="porcentagem">0</span>
+              </div>
+              <div class="medicamento-info">2mg</div>
+              <div class="barra-progresso">
+                <div class="barra-preenchimento"></div>
+              </div>
+              <div class="laboratorio">SUFARC Pharma</div>
+            </div>
+
+            <div class="medicamento-box" data-nome="Joycezumabe">
+              <div class="medicamento-header">
+                <h3>Joycezumabe</h3>
+                <span class="porcentagem">0</span>
+              </div>
+              <div class="medicamento-info">150mg</div>
+              <div class="barra-progresso">
+                <div class="barra-preenchimento"></div>
+              </div>
+              <div class="laboratorio">SUFARC Pharma</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Seção da Esteira (Verde) -->
+        <section class="esteira-section">
+          <div class="esteira-container">
+            <div class="esteira-track" id="esteira-track">
+              <!-- Cápsulas serão adicionadas dinamicamente -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Seção da Cartela de Blíster (Rosa) -->
+        <section class="blister-section">
+          <h2>Medidor Geral</h2>
+          <div class="blister-outer-container">
+            <div class="blister">
+              <div class="blister-header">
+                <span id="porcentagem-geral">0%</span>
+              </div>
+              <div class="blister-pills-container">
+                <div class="blister-pills" id="blister-pills">
+                  <!-- Comprimidos serão adicionados dinamicamente pelo JavaScript -->
+                </div>
+              </div>
+              <div class="blister-footer">
+                <div class="progress-container">
+                  <div class="progress-bar" id="progresso-geral">
+                    <div class="progress-fill"></div>
+                  </div>
+                  <span class="progress-text">Progresso Geral</span>
+                </div>
+              </div>
+            </div>
+            <div class="percentage-indicators">
+              <div class="percentage-indicator indicator-98" data-value="98">98%</div>
+              <div class="percentage-indicator indicator-84" data-value="84">84%</div>
+              <div class="percentage-indicator indicator-70" data-value="70">70%</div>
+              <div class="percentage-indicator indicator-56" data-value="56">56%</div>
+              <div class="percentage-indicator indicator-42" data-value="42">42%</div>
+              <div class="percentage-indicator indicator-28" data-value="28">28%</div>
+              <div class="percentage-indicator indicator-14" data-value="14">14%</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Controles -->
+      <div class="controles">
+        <div class="controle-grupo">
+          <label for="medicamento-select">Selecionar Medicamento:</label>
+          <select id="medicamento-select">
+            <option value="DesvenlafaxAnderson">DesvenlafaxAnderson</option>
+            <option value="Renatril">Renatril</option>
+            <option value="Karicicilina">Karicicilina</option>
+            <option value="Jardenal">Jardenal</option>
+            <option value="DipiRonne">DipiRonne</option>
+            <option value="Elietazepam">Elietazepam</option>
+            <option value="Joycezumabe">Joycezumabe</option>
+          </select>
+        </div>
+
+        <div class="botoes-controle">
+          <button id="aumentar-btn" class="btn btn-aumentar">
+            Aumentar (+1)
+          </button>
+          <button id="diminuir-btn" class="btn btn-diminuir">
+            Diminuir (-1)
+          </button>
+          <button id="reset-btn" class="btn btn-reset">Reset Tudo</button>
+          <button id="reset-individual-btn" class="btn btn-reset-individual">
+            Reset Individual
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

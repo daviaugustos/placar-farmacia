@@ -1,0 +1,757 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Cabeçalho */
+.header {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.meta-info {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.meta-info .titulo-meta {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 20px rgba(41, 128, 185, 0.4);
+  line-height: 1.4;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+/* Dashboard Principal */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "medicamentos esteira tubo";
+  gap: 20px;
+  height: calc(100vh - 240px); /* Significantly reduced height */
+  min-height: 300px; /* Further reduced minimum height */
+  align-items: stretch;
+  overflow: hidden; /* Prevent overall scrolling */
+}
+
+/* Seção dos Medicamentos (Amarelo) */
+.medicamentos-section {
+  grid-area: medicamentos;
+  background: rgba(255, 235, 59, 0.9);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 3px solid #fbc02d;
+  overflow: hidden; /* Hide scroll on section */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.medicamentos-container {
+  overflow-y: auto; /* Add scroll to container */
+  flex: 1;
+  padding-right: 5px; /* Space for scrollbar */
+  margin-right: -5px; /* Compensate for padding */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.medicamentos-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #f57f17;
+  font-size: 1.5rem;
+}
+
+/* Cores específicas para cada medicamento */
+.medicamento-box {
+  will-change: transform;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 15px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.medicamento-box.movendo {
+  z-index: 10;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+  border: 2px solid #4caf50;
+}
+
+.medicamento-box {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 3px solid #ddd;
+  transition: all 0.3s ease, transform 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.medicamento-box[data-nome="DesvenlafaxAnderson"] {
+  border-color: #e91e63;
+}
+
+.medicamento-box[data-nome="Renatril"] {
+  border-color: #2196f3;
+}
+
+.medicamento-box[data-nome="Karicicilina"] {
+  border-color: #4caf50;
+}
+
+.medicamento-box[data-nome="Jardenal"] {
+  border-color: #ff9800;
+}
+
+.medicamento-box[data-nome="DipiRonne"] {
+  border-color: #9c27b0;
+}
+
+.medicamento-box[data-nome="Elietazepam"] {
+  border-color: #f44336;
+}
+
+.medicamento-box[data-nome="Joycezumabe"] {
+  border-color: #00bcd4;
+}
+
+.medicamento-box.selected {
+  border-width: 4px;
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.medicamento-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.medicamento-header h3 {
+  color: #2c3e50;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.porcentagem {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  min-width: 30px;
+  text-align: center;
+}
+
+.medicamento-info {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.barra-progresso {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.barra-preenchimento {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
+  width: 0%;
+  transition: width 0.5s ease;
+  border-radius: 4px;
+}
+
+.laboratorio {
+  color: #999;
+  font-size: 0.8rem;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Esteira de Cápsulas (Verde/Vermelho) */
+.esteira-section {
+  grid-area: esteira;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 3px solid #4caf50;
+  overflow: hidden; /* Prevent internal scrolling */
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.esteira-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.esteira-track {
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(90deg, #2e7d32, #4caf50, #2e7d32);
+  border-radius: 40px;
+  position: relative;
+  overflow: visible;
+  border: 3px solid #1b5e20;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform-style: preserve-3d;
+}
+
+.esteira-track::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    #1b5e20 0px,
+    #1b5e20 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  animation: esteira-movimento 2s linear infinite;
+}
+
+@keyframes esteira-movimento {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(40px);
+  }
+}
+
+.capsula {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  background: linear-gradient(180deg, #f44336, #d32f2f);
+  border-radius: 15px 15px 15px 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 0.8rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid #b71c1c;
+  animation: capsula-movimento 8s linear infinite;
+}
+
+.capsula::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  height: 50%;
+  background: linear-gradient(180deg, #ffeb3b, #ffc107);
+  border-radius: 15px 15px 0 0;
+  border: 2px solid #f57f17;
+}
+
+@keyframes capsula-movimento {
+  0% {
+    transform: translateX(-50px) translateY(-50%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(100vw - 50px)) translateY(-50%);
+    opacity: 1;
+  }
+}
+
+/* Cartela de Blíster */
+.blister-section {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 3px solid #2196f3;
+  text-align: center;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevent internal scrolling */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+.blister-outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.blister {
+  width: 240px;
+  height: auto;
+  max-height: 90vh;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.blister-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 1.2rem;
+}
+
+.blister-footer {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 2px solid #f0f0f0;
+}
+
+/* Container for blister pills */
+.blister-pills-container {
+  display: flex;
+  margin: 10px 0;
+  flex: 1;
+}
+
+.blister-pills {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 5px;
+  flex: 1;
+}
+
+/* Percentage indicators styling */
+.percentage-indicators {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 13px; /* Adjusted gap to align with pill rows */
+  width: 70px;
+  padding: 80px 5px 10px 5px; /* Adjusted padding to lower the indicators a bit more */
+  margin: 10px 0; /* Same margin as blister-pills-container */
+}
+
+.percentage-indicator {
+  font-size: 0.9rem; /* Made text bigger */
+  font-weight: bold; /* Made text bold */
+  color: #666;
+  padding: 2px 0 2px 8px;
+  text-align: left;
+  white-space: nowrap;
+  height: 35px; /* Match pill height */
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+/* Percentage indicators are now aligned from the bottom */
+
+.percentage-indicator::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  width: 10px;
+  height: 2px;
+  background-color: #4caf50;
+}
+
+/* Active indicator styling */
+.percentage-indicator.active {
+  color: #4caf50;
+  font-weight: bold;
+  border-left-color: #4caf50;
+  border-left-width: 3px;
+}
+
+/* Next target indicator styling */
+.percentage-indicator.next-target {
+  border-left-style: solid;
+  border-left-color: #90ee90;
+}
+
+.pill-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.pill {
+  flex: 1;
+  min-width: 80px;
+  height: 35px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: none; /* Removed shadow */
+  border: 2px solid #ccc;
+  background: rgba(255, 255, 255, 0.9);
+  color: #888;
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 0 10px;
+}
+
+/* Estilo para cápsulas vazias */
+.pill.vazia {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: #d0d0d0;
+}
+
+/* Estilo para o fundo da cápsula */
+.pill-fundo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  border: 2px solid #d0d0d0;
+  z-index: 1;
+}
+
+/* Estilo para o preenchimento da cápsula */
+.pill-preenchimento {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #4caf50;
+  border-radius: 13px 0 0 13px;
+  z-index: 2;
+  transition: width 0.3s ease;
+}
+
+.pill::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.pill.active {
+  transform: translateY(0); /* Removed the lift effect */
+  box-shadow: none; /* Removed the shadow */
+  font-weight: bold;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  /* No background color here - we'll use only the preenchimento element for the green color */
+}
+
+.pill.active .pill-fundo {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: #d0d0d0;
+}
+
+.pill-brilho {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.8)
+  );
+  border-radius: 0 18px 18px 0;
+  transform: skewX(-15deg);
+  transform-origin: right;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.pill:hover .pill-brilho {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.9)
+  );
+  opacity: 1;
+}
+
+/* Efeito de celebração quando a meta é atingida */
+.blister.meta-atingida {
+  animation: pulse 0.5s ease-in-out 3;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes celebracao {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Controles */
+.controles {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.controle-grupo {
+  margin-bottom: 20px;
+}
+
+.controle-grupo label {
+  display: block;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.controle-grupo select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  color: #2c3e50;
+  transition: border-color 0.3s ease;
+}
+
+.controle-grupo select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.botoes-controle {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-aumentar {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  color: white;
+}
+
+.btn-diminuir {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  color: white;
+}
+
+.btn-reset {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+  color: white;
+}
+
+.btn-reset-individual {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: white;
+}
+
+.info-controles {
+  text-align: center;
+  color: #666;
+}
+
+.info-controles p {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.info-controles small {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "medicamentos"
+      "esteira"
+      "tubo";
+  }
+
+  .medicamentos-section {
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .meta-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .botoes-controle {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Animações de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.medicamento-box {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.medicamento-box:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.medicamento-box:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.medicamento-box:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.medicamento-box:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.medicamento-box:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.medicamento-box:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.medicamento-box:nth-child(7) {
+  animation-delay: 0.7s;
+}
